@@ -1,24 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { motion } from "framer-motion";
+
+import "./App.css";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <motion.img
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ ease: "linear", duration: 2 }}
+        className="logo"
+        src={`${process.env.PUBLIC_URL}/RBB-logo.png`}
+        alt={"rbb-manufacturing-logo"}
+      />
+      <motion.a
+        whileHover={{ scale: 1.1 }}
+        transition={{ ease: "linear", duration: 0.5 }}
+        href={"mailto:info@rbbmanufacturing.com&subject=Saying hi!"}
+        className="email"
+      >
+        info@rbbmanufacturing.com
+      </motion.a>
     </div>
   );
 }
