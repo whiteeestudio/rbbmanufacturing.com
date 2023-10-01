@@ -7,7 +7,9 @@ import { Form, TextInput, TextAreaInput } from "./shared-components/Form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import styles from "./App.module.scss";
 import Blob from "./shared-components/Blob";
-import { useCallback, useMemo, useRef, useState } from "react";
+import { disableBodyScroll, clearAllBodyScrollLocks } from "body-scroll-lock";
+
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import classNames from "classnames";
@@ -27,6 +29,7 @@ const App = () => {
   const [isSuccess, setIsSuccess] = useState(false);
   const [isError, setIsError] = useState(false);
   const recaptchaRef = useRef<ReCAPTCHA>(null);
+  const targetRef = useRef<HTMLDivElement>(null);
 
   const schema = useMemo(
     () =>
@@ -53,8 +56,6 @@ const App = () => {
   const onSubmit = useCallback(
     async (formValues: FormDataValues) => {
       const token = await recaptchaRef?.current?.executeAsync();
-      console.log(token);
-      console.log(formValues);
 
       const { data } = await supabase.functions.invoke("contact-email", {
         body: {
@@ -79,9 +80,17 @@ const App = () => {
     [reset]
   );
 
+  useEffect(() => {
+    if (targetRef?.current) {
+      disableBodyScroll(targetRef?.current);
+    }
+
+    return clearAllBodyScrollLocks();
+  }, []);
+
   return (
     <>
-      <div className={styles["header"]}>
+      <div ref={targetRef} className={styles["header"]}>
         <motion.img
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
