@@ -1,146 +1,97 @@
 import { motion } from "framer-motion";
-import ReCAPTCHA from "react-google-recaptcha";
-import { createClient } from "@supabase/supabase-js";
-
-import Button from "./shared-components/Button";
-import { Form, TextInput, TextAreaInput } from "./shared-components/Form";
-import { yupResolver } from "@hookform/resolvers/yup";
 import styles from "./App.module.scss";
 import Blob from "./shared-components/Blob";
-import { disableBodyScroll, clearAllBodyScrollLocks } from "body-scroll-lock";
-
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import * as yup from "yup";
-import { useForm } from "react-hook-form";
+import Masonry from "react-masonry-css";
+import Link from "./shared-components/Link";
+import { useWindowView } from "./utils/use-window-view";
 import classNames from "classnames";
 
-interface FormDataValues {
-  name: string;
-  subject: string;
-  email: string;
-  message: string;
-}
-const supabase = createClient(
-  `${process.env.REACT_APP_SUPABASE_URL}`,
-  `${process.env.REACT_APP_SUPABASE_ANON_KEY}`
-);
+const NUMBER_OF_IMAGES = 43;
 
 const App = () => {
-  const [isSuccess, setIsSuccess] = useState(false);
-  const [isError, setIsError] = useState(false);
-  const recaptchaRef = useRef<ReCAPTCHA>(null);
-  const targetRef = useRef<HTMLDivElement>(null);
+  const { isTablet } = useWindowView();
 
-  const schema = useMemo(
-    () =>
-      yup
-        .object()
-        .shape({
-          name: yup.string().required("name is required"),
-          subject: yup.string().required("subject is required"),
-          email: yup
-            .string()
-            .email("please enter a valid email.")
-            .required("email is required"),
-          message: yup.string().required("message is required"),
-        })
-        .required(),
-    []
-  );
-
-  const methods = useForm<FormDataValues>({
-    resolver: yupResolver(schema),
-  });
-  const { reset } = methods;
-
-  const onSubmit = useCallback(
-    async (formValues: FormDataValues) => {
-      const token = await recaptchaRef?.current?.executeAsync();
-
-      const { data } = await supabase.functions.invoke("contact-email", {
-        body: {
-          reCaptchaToken: token,
-          from: formValues.email,
-          to: "info@rbbmanufacturing.com",
-          ...formValues,
-        },
-      });
-
-      recaptchaRef?.current?.reset();
-
-      if (data && data.done) {
-        setIsError(false);
-        setIsSuccess(true);
-        reset();
-      } else {
-        setIsError(true);
-        setIsSuccess(false);
-      }
-    },
-    [reset]
-  );
-
-  useEffect(() => {
-    if (targetRef?.current) {
-      disableBodyScroll(targetRef?.current);
-    }
-
-    return clearAllBodyScrollLocks();
-  }, []);
-
+  const breakpointColumns = {
+    default: 3,
+    2000: 4,
+    1700: 4,
+    1350: 3,
+    1050: 2,
+  };
   return (
     <>
-      <div ref={targetRef} className={styles["header"]}>
-        <motion.img
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ ease: "linear", duration: 2 }}
+        className={styles["header"]}
+      >
+        <div className={styles["logo"]}>RBB MANUFACTURING ©</div>
+        <div className={styles["description"]}>
+          5 years of experience in manufacturing collections for streetwear and
+          lifestyle brands // free tech pack creation // low minimum order
+          quantities (MOQs) // competitive pricing // long-lasting durability
+        </div>
+      </motion.div>
+      <motion.div className={styles["container"]}>
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ ease: "linear", duration: 2 }}
-          className={styles["logo"]}
-          src={`${process.env.PUBLIC_URL}/RBB-logo.svg`}
-          alt={"rbb-manufacturing-logo"}
-        />
-      </div>
-      <div className={styles["container"]}>
-        <ReCAPTCHA
-          ref={recaptchaRef}
-          size="invisible"
-          badge="bottomleft"
-          sitekey={process.env.REACT_APP_GOOGLE_RECAPTCHA_SITE_KEY!}
-        />
-        <Form {...methods} className={styles["form"]} onSubmit={onSubmit}>
-          <TextInput label="name" name={"name"} />
-          <TextInput label="email" name={"email"} />
-          <TextInput label="subject" name={"subject"} />
-          <TextAreaInput label="message" name={"message"} rows={1} />
-          <Button type="submit" className={styles["button"]}>
-            send message
-          </Button>
-          {isSuccess && (
-            <p
-              className={classNames(
-                styles["message"],
-                styles["message--success"]
-              )}
+          className={classNames(styles["contact-container"], {
+            [styles["contact-container--small"]]: isTablet,
+          })}
+        >
+          <h3 className={styles["contact-title"]}> Contact me for a quote</h3>
+          <div className={styles["contact-list"]}>
+            <Link
+              href="https://wa.me/15145830305"
+              className={styles["contact-link"]}
             >
-              your message has been sent!
-            </p>
-          )}
-          {isError && (
-            <p
-              className={classNames(
-                styles["message"],
-                styles["message--error"]
-              )}
+              ➫ whatsapp
+            </Link>
+            <Link
+              href="mailto:rbbmanufacturing@gmail.com"
+              className={styles["contact-link"]}
             >
-              your message could not be sent. please email us directly at
-              info@rbbmanufacturing.com.
-            </p>
-          )}
-        </Form>
+              ➫ email
+            </Link>
+          </div>
+        </motion.div>
+
+        <motion.h2
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ ease: "linear", duration: 2 }}
+          className={styles["title"]}
+        >
+          Past works
+        </motion.h2>
+
+        <Masonry
+          breakpointCols={breakpointColumns}
+          className={styles["masonry-grid"]}
+          columnClassName={styles["masonry-grid_column"]}
+        >
+          {Array(NUMBER_OF_IMAGES)
+            .fill(null)
+            .map((_, i) => (
+              <motion.img
+                key={`product ${i}`}
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ ease: "linear", duration: 1 }}
+                src={`/images/products/${i + 1}.jpg`}
+                alt={`product ${i}`}
+                className={styles["product-image"]}
+              />
+            ))}
+        </Masonry>
+      </motion.div>
+      <div className={styles["blob-container"]}>
+        <Blob className={styles["blob"]} />
       </div>
-      <Blob className={styles["blob"]} width={275}>
-        info@rbbmanufacturing.com
-      </Blob>
     </>
   );
 };

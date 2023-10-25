@@ -1,0 +1,54 @@
+.header {
+  .logo {
+    overflow-wrap: break-word;
+    font-size: 100px;
+    line-height: 100px;
+    font-weight: 900;
+    padding: 25px;
+
+    @media only screen and (max-width: 900px) {
+      padding: 15px;
+    }
+  }
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 100px 15px;
+
+  .subtitle {
+    color: #000;
+    font-size: 14px;
+    font-weight: 700;
+    margin: 15px 5px;
+    padding-bottom: 5px;
+
+    @media only screen and (min-width: 601px) and (max-width: 900px) {
+      font-size: 14px;
+      margin: 10px 3px;
+    }
+    @media only screen and (max-width: 600px) {
+      font-size: 12px;
+      margin: 0;
+    }
+  }
+
+  .form {
+    width: 90%;
+    max-width: 700px;
+    display: flex;
+    align-items: flex-end;
+
+    .button {
+      margin-top: 24px;
+    }
+  }
+}
+
+.blob {
+  position: fixed;
+  right: 30px;
+  bottom: 25px;
+}
