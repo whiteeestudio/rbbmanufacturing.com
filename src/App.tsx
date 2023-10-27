@@ -12,7 +12,7 @@ const App = () => {
   const { isTablet } = useWindowView();
 
   const breakpointColumns = {
-    default: 3,
+    default: 4,
     2000: 4,
     1700: 4,
     1350: 3,
