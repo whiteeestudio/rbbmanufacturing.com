@@ -1,6 +1,6 @@
 import classNames from "classnames";
 
-import styles from "./Button.module.scss";
+import styles from "./styles.module.scss";
 
 interface Props {
   variant?: "primary" | "secondary" | "tertiary";
@@ -20,7 +20,7 @@ const Button: React.FC<Props & React.HTMLProps<HTMLButtonElement>> = ({
       className={classNames(
         styles["button"],
         styles[`button--${variant}`],
-        className
+        className,
       )}
       type={type}
       {...props}

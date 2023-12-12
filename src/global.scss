@@ -1,0 +1,72 @@
+@use "utils/mixins/semantics";
+
+body,
+html {
+  font-family: Neue Haas Grotesk Display Pro;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+  letter-spacing: 0.33px;
+  min-height: 100dvh;
+
+  width: 100vw;
+  margin: 0;
+  background-color: semantics.$background-color;
+
+  & > #root {
+    height: 100%;
+    padding: 24px;
+
+    @media only screen and (max-width: 900px) {
+      padding: 12px;
+    }
+  }
+}
+
+::-moz-selection {
+  color: white;
+  background: black;
+}
+
+::selection {
+  color: white;
+  background: black;
+}
+
+h1 {
+  margin: 16px 0;
+  font-size: 32px;
+  font-weight: 700;
+}
+
+h2 {
+  margin: 8px 0;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+h3 {
+  margin: 4px 0;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a:link {
+  text-decoration: none;
+}
+
+a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+a:active {
+  text-decoration: none;
+}

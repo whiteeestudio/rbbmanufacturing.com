@@ -1,3 +1,6 @@
+@use "utils/mixins/semantics";
+@use "utils/mixins/colors";
+
 .button {
   border-radius: 5px;
   outline: none;
@@ -7,6 +10,7 @@
   font-family: "Helvetica Neue";
   font-weight: 900;
   padding: 0;
+  min-width: 124px;
 
   &:disabled {
     cursor: not-allowed;
@@ -14,14 +18,18 @@
   }
 
   &--primary {
+    background: semantics.$button-background-color;
     border: none;
-    background: transparent;
-    color: #1a5fba;
+    border-radius: 10px;
+    color: semantics.$button-text-color;
     transition: transform 0.2s;
-    font-size: 36px;
+    font-size: clamp(16px, 2vw, 20px);
+    font-weight: 500;
+    padding: 12px 32px;
+    border: 2px solid transparent;
 
-    @media only screen and (max-width: 600px) {
-      font-size: 24px;
+    @media only screen and (max-width: 900px) {
+      padding: 10px 24px;
     }
 
     &:enabled:active {
@@ -29,7 +37,9 @@
     }
 
     &:hover {
-      color: black;
+      color: colors.$dark-grey;
+      background: colors.$beige;
+      border: 2px solid colors.$dark-grey;
     }
 
     &:hover:disabled {
@@ -38,6 +48,14 @@
   }
 
   &--secondary {
+    color: colors.$dark-grey;
+    background: colors.$beige;
+    border: 2px solid colors.$dark-grey;
+    border-radius: 10px;
+    padding: 12px 32px;
+  }
+
+  &--tertiary {
     border: none;
     background: transparent;
     font-size: 20px;

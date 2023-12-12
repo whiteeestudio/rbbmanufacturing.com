@@ -1,0 +1,88 @@
+@use "utils/mixins/colors";
+@use "utils/mixins/semantics";
+
+.container {
+  position: sticky;
+  background: colors.$white;
+  border-radius: 25px;
+  border: semantics.$border;
+  top: 24px;
+  z-index: 10;
+
+  @media only screen and (max-width: 900px) {
+    top: 12px;
+  }
+
+  .logo {
+    position: sticky;
+    top: 0px;
+    padding: 16px 24px;
+    font-size: 24px;
+    font-weight: 700;
+
+    @media only screen and (max-width: 900px) {
+      font-size: 16px;
+    }
+
+    & > p {
+      margin: 0;
+    }
+  }
+
+  .content {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+    column-gap: 48px;
+    overflow-y: scroll;
+
+    .catchphrase-container {
+      display: flex;
+      flex-direction: column;
+      gap: 60px;
+      width: 50%;
+      padding-left: 80px;
+
+      @media only screen and (max-width: 900px) {
+        gap: 36px;
+        width: 100%;
+        padding: 48px 32px 32px;
+      }
+
+      .catchphrase {
+        font-size: clamp(32px, 5vw, 72px);
+        line-height: clamp(40px, 5vw, 80px);
+
+        width: 100%;
+        max-width: 600px;
+        font-weight: 900;
+        margin: 0;
+      }
+
+      .description {
+        font-size: clamp(16px, 2vw, 20px);
+        line-height: clamp(26px, 2vw, 32px);
+
+        font-weight: 500;
+        margin: 0;
+        color: colors.$dark-grey;
+        max-width: 700px;
+        padding: 2px;
+      }
+    }
+
+    .carousel {
+      height: 300px;
+      width: 45%;
+      background: white;
+      border-radius: 25px;
+
+      // border: 1px solid black;
+
+      @media only screen and (max-width: 900px) {
+        width: 100%;
+      }
+    }
+  }
+}

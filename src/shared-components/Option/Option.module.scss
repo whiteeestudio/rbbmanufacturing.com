@@ -1,0 +1,54 @@
+@use "utils/mixins/colors";
+
+.container {
+  position: relative;
+}
+
+.checkbox {
+  -webkit-appearance: none;
+  appearance: none;
+
+  width: 300px;
+  height: 100px;
+  border-radius: 12px;
+  border: 2px solid colors.$black;
+  background: rgba(255, 255, 255, 0.5);
+  transition: all 0.4s;
+  cursor: pointer;
+  margin: 0;
+
+  border-radius: 25px;
+  border: 1px solid colors.$black;
+  accent-color: transparent;
+
+  &--no-description {
+    height: 66px;
+    border-radius: 20px;
+  }
+}
+
+input[type="checkbox"]:checked,
+input[type="checkbox"]:active,
+input[type="radio"]:checked,
+input[type="radio"]:active {
+  background-color: colors.$dark-grey;
+
+  + label {
+    color: colors.$white;
+  }
+}
+
+.label-container {
+  position: absolute;
+  top: 0px;
+  padding: 20px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  .label {
+    font-size: 18px;
+    font-weight: 700;
+  }
+}

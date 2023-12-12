@@ -8,7 +8,7 @@ interface Props {
   children: string;
 }
 
-const Title: React.FC<Props & React.HTMLProps<HTMLHeadingElement>> = ({
+const Heading: React.FC<Props & React.HTMLProps<HTMLHeadingElement>> = ({
   variant,
   className,
   children,
@@ -22,4 +22,4 @@ const Title: React.FC<Props & React.HTMLProps<HTMLHeadingElement>> = ({
   );
 };
 
-export default Title;
+export default Heading;

@@ -4,7 +4,8 @@ import styles from "./TextInput.module.scss";
 import { forwardRef } from "react";
 
 interface Props {
-  label?: string;
+  label: string;
+  isOptional?: boolean;
   className?: string;
   error?: string;
 }
@@ -12,17 +13,15 @@ interface Props {
 const TextInput: React.ForwardRefRenderFunction<
   HTMLInputElement,
   Props & React.HTMLProps<HTMLInputElement>
-> = ({ label, className, error, ...props }, ref) => (
+> = ({ label, className, isOptional, error, ...props }, ref) => (
   <div className={classNames(styles["container"], className)}>
-    {label && (
-      <label
-        className={classNames(styles["label"], {
-          [styles["label--error"]]: !!error,
-        })}
-      >
-        {label}
-      </label>
-    )}
+    <label
+      className={classNames(styles["label"], {
+        [styles["label--error"]]: !!error,
+      })}
+    >
+      {label} {isOptional && <p>(optional)</p>}
+    </label>
     <div className={styles["input-container"]}>
       <input
         ref={ref}
