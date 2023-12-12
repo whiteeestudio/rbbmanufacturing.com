@@ -1,5 +1,69 @@
 @use "utils/mixins/semantics";
 
+@font-face {
+  font-family: "Neue Haas Grotesk Display Pro";
+  src:
+    local("Neue Haas Grotesk Display Pro"),
+    url(./fonts/NeueHaasDisplayXXThin.ttf) format("truetype");
+  font-weight: 200;
+}
+
+@font-face {
+  font-family: "Neue Haas Grotesk Display Pro";
+  src:
+    local("Neue Haas Grotesk Display Pro"),
+    url(./fonts/NeueHaasDisplayXThin.ttf) format("truetype");
+  font-weight: 200;
+}
+
+@font-face {
+  font-family: "Neue Haas Grotesk Display Pro";
+  src:
+    local("Neue Haas Grotesk Display Pro"),
+    url(./fonts/NeueHaasDisplayThin.ttf) format("truetype");
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: "Neue Haas Grotesk Display Pro";
+  src:
+    local("Neue Haas Grotesk Display Pro"),
+    url(./fonts/NeueHaasDisplayLight.ttf) format("truetype");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Neue Haas Grotesk Display Pro";
+  src:
+    local("Neue Haas Grotesk Display Pro"),
+    url(./fonts/NeueHaasDisplayRoman.ttf) format("truetype");
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "Neue Haas Grotesk Display Pro";
+  src:
+    local("Neue Haas Grotesk Display Pro"),
+    url(./fonts/NeueHaasDisplayMedium.ttf) format("truetype");
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: "Neue Haas Grotesk Display Pro";
+  src:
+    local("Neue Haas Grotesk Display Pro"),
+    url(./fonts/NeueHaasDisplayBold.ttf) format("truetype");
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "Neue Haas Grotesk Display Pro";
+  src:
+    local("Neue Haas Grotesk Display Pro"),
+    url(./fonts/NeueHaasDisplayBlack.ttf) format("truetype");
+  font-weight: 900;
+}
+
 body,
 html {
   font-family: Neue Haas Grotesk Display Pro;

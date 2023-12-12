@@ -11,6 +11,7 @@
 
   @media only screen and (max-width: 900px) {
     top: 12px;
+    border-radius: 15px;
   }
 
   .logo {
@@ -64,7 +65,7 @@
         font-size: clamp(16px, 2vw, 20px);
         line-height: clamp(26px, 2vw, 32px);
 
-        font-weight: 500;
+        font-weight: 600;
         margin: 0;
         color: colors.$dark-grey;
         max-width: 700px;
@@ -75,7 +76,7 @@
     .carousel {
       height: 300px;
       width: 45%;
-      background: white;
+      background: transparent;
       border-radius: 25px;
 
       // border: 1px solid black;
