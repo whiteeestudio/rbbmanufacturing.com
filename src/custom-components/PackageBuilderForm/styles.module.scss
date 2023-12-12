@@ -1,7 +1,7 @@
 @use "utils/mixins/colors";
 
 .marquee {
-  position: sticky;
+  position: sticky !important;
   top: 89px;
 
   @media only screen and (max-width: 900px) {
